@@ -1,8 +1,8 @@
 from datacenter.models import Passcard, Visit
-from django.shortcuts import render, get_object_or_404
+from datacenter.retrieve_and_format_duration import (format_duration,
+                                                     is_visit_long)
+from django.shortcuts import get_object_or_404, render
 from django.utils import timezone
-from datacenter.retrieve_and_format_duration import format_duration
-from datacenter.has_long_visit import is_visit_long
 
 
 def passcard_info_view(request, passcode):

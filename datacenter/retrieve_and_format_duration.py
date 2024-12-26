@@ -15,3 +15,7 @@ def format_duration(duration):
     hours, remainder = divmod(total_seconds, 3600)
     minutes, _ = divmod(remainder, 60)
     return f'{hours:02}ч {minutes:02}мин'
+
+
+def is_visit_long(visit, minutes=60):
+    return visit > minutes * 60
