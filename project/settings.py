@@ -9,7 +9,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'HOST': env.str('HOST'),
-        'PORT': env.str('PORT'),
+        'PORT': env.int('PORT'),
         'NAME': env.str('NAME'),
         'USER': env.str('USER'),
         'PASSWORD': env.str('PASSWORD'),
@@ -24,7 +24,7 @@ DEBUG = env.bool('DEBUG')
 
 ROOT_URLCONF = 'project.urls'
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = env.list('ALLOWED')
 
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
