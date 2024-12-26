@@ -1,21 +1,18 @@
 from datacenter.models import Visit
+from datacenter.retrieve_and_format_duration import (format_duration,
+                                                     get_duration)
 from django.shortcuts import render
-from datacenter.retrieve_and_format_duration import get_duration, format_duration
-import pytz
 
 
 def storage_information_view(request):
     visits = Visit.objects.filter(leaved_at=None)
     non_closed_visits = []
-    local_tz = pytz.timezone("Europe/Moscow")
     for visit in visits:
-        dt_local = visit.entered_at.astimezone(local_tz)
-        formatted_date = dt_local.strftime("%d %B %Y %H:%M")
-        duration = get_duration(visits)
+        duration = get_duration(visit.entered_at)
         formatted_duration = format_duration(duration)
         non_closed_visits.append({
                 'who_entered': visit.passcard,
-                'entered_at': formatted_date,
+                'entered_at': visit.entered_at.strftime("%d %B %Y %H:%M"),
                 'duration': formatted_duration,
             })
     context = {
